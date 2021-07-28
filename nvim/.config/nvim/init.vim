@@ -115,6 +115,11 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'honza/vim-snippets'
     Plug 'laishulu/vim-macos-ime'
     Plug 'tmhedberg/SimpylFold'
+
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
 call plug#end()
 
 "
@@ -207,6 +212,16 @@ noremap <silent> <leader>w :Buffer<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 "let g:fzf_preview_window = 'right:60%'
 "let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+"
+
+"
+""telescope.nvim
+"
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua reqeuire('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 colo seoul256
 set background=dark
@@ -217,7 +232,7 @@ set background=dark
 "let g:SnazzyTransparent=1
 
 " Compile function
-noremap <leader>r :call CompileRunGcc()<CR>
+noremap <leader>rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
@@ -256,6 +271,8 @@ func! CompileRunGcc()
 		set splitbelow
 		:sp
 		:term go run .
+    elseif &filetype == 'rust'
+        :RustRun
 	endif
 endfunc
 
