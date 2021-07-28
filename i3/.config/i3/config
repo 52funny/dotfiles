@@ -30,9 +30,18 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Set key repeat
 exec --no-startup-id xset r rate 300 100
 
+# Set fcitx5 keyboard
 exec --no-startup-id fcitx5 -d
+
+# Set the background image
+exec --no-startup-id feh --bg-scale '/home/funny/wallpaper/wallpaper.jpg'
+
+# Set transpraent windows
+exec --no-startup-id picom -CGb
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
