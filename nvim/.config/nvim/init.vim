@@ -120,6 +120,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+    Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 "
@@ -143,6 +145,9 @@ let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-pairs',
     \ 'coc-vimlsp',
+    \ 'coc-rust-analyzer',
+    \ 'coc-clangd',
+    \ 'coc-snippets'
   \ ]
 
 "
@@ -236,23 +241,26 @@ noremap <leader>rr :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
 	if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "!time ./%<"
+        exec "FloatermNew --autoclose=0 gcc % -o %< && ./%<"
+		" exec "!g++ % -o %<"
+		" exec "!./%<"
 	elseif &filetype == 'cpp'
-		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o %<"
-		:sp
-		:res -15
-		:term ./%<
+		" set splitbelow
+        exec "FloatermNew --autoclose=0 g++ -std=c++11 % -Wall -o %< && ./%<"
+		" exec "!g++ -std=c++11 % -Wall -o %<"
+		" :sp
+		" :res -15
+		" :term ./%<
 	elseif &filetype == 'java'
 		exec "!javac %"
 		exec "!time java %<"
 	elseif &filetype == 'sh'
 		:!time bash %
 	elseif &filetype == 'python'
-		set splitbelow
-		:sp
-		:term python3 %
+        exec "FloatermNew --autoclose=0 python3 %"
+		" set splitbelow
+		" :sp
+		" :term python3 %
 	elseif &filetype == 'html'
 		silent! exec "!".g:mkdp_browser." % &"
 	elseif &filetype == 'markdown'
@@ -268,9 +276,8 @@ func! CompileRunGcc()
 		:sp
 		:term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .
 	elseif &filetype == 'go'
-		set splitbelow
-		:sp
-		:term go run .
+        exec "FloatermNew --autoclose=0 go run ."
+		" :term go run .
     elseif &filetype == 'rust'
         :RustRun
 	endif
