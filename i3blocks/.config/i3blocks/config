@@ -52,6 +52,17 @@ command=./scripts/battery2/battery2
 markup=pango
 interval=30
 
+[volumn]
+command=./scripts/volume/volume
+LABEL= 
+# LABEL=VOL 
+interval=once
+signal=10
+#STEP=5%
+#MIXER=[determined automatically]
+#SCONTROL=[determined automatically]
+#NATURAL_MAPPING=0
+
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=1

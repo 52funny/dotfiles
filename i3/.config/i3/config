@@ -42,6 +42,8 @@ exec --no-startup-id feh --bg-scale '/home/funny/wallpaper/wallpaper.jpg'
 # Set transpraent windows
 exec --no-startup-id picom -CGb
 
+# Set Screen timeout
+exec --no-startup-id xset dpms 600
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
