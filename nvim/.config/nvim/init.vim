@@ -95,6 +95,8 @@ noremap H :tabp<CR>
 call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
     "Plug 'dracula/vim'
     "Plug 'connorholyday/vim-snazzy'
     Plug 'junegunn/seoul256.vim'
@@ -103,7 +105,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'vim-airline/vim-airline'
     Plug 'tpope/vim-commentary'
-    Plug 'preservim/nerdtree'
     Plug 'luochen1990/rainbow'
     Plug 'gcmt/wildfire.vim'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -115,11 +116,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'honza/vim-snippets'
     Plug 'laishulu/vim-macos-ime'
     Plug 'tmhedberg/SimpylFold'
-
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
     Plug 'voldikss/vim-floaterm'
 call plug#end()
@@ -147,7 +143,8 @@ let g:coc_global_extensions = [
     \ 'coc-vimlsp',
     \ 'coc-rust-analyzer',
     \ 'coc-clangd',
-    \ 'coc-snippets'
+    \ 'coc-snippets',
+    \ 'coc-explorer',
   \ ]
 
 "
@@ -168,12 +165,43 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
 "
-""NERDTree
+""vim-go
 "
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap tt :NERDTreeToggle<CR>
-"nnoremap <C-f> :NERDTreeFind<CR>
+let g:go_fmt_command = "goimports" " 格式化将默认的 gofmt 替换
+let g:go_echo_go_info = 0
+let g:go_doc_popup_window = 0
+let g:go_def_mapping_enabled = 0
+let g:go_template_autocreate = 0
+let g:go_textobj_enabled = 0
+let g:go_auto_type_info = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_trailing_whitespace_error = 1
+let g:go_highlight_types = 1
+let g:go_highlight_variable_assignments = 0
+let g:go_highlight_variable_declarations = 0
+let g:go_doc_keywordprg_enabled = 0
+
+""
+"""NERDTree
+""
+"nnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <C-n> :NERDTree<CR>
+"nnoremap tt :NERDTreeToggle<CR>
+""nnoremap <C-f> :NERDTreeFind<CR>
 
 
 "
@@ -211,7 +239,7 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 "
 ""fzf
 "
-noremap <silent> <C-p> :Files<CR>
+noremap <silent> <leader>ff :Files<CR>
 noremap <silent> <leader>h :History<CR>
 noremap <silent> <leader>w :Buffer<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
@@ -219,14 +247,11 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 "let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 "
 
+
 "
-""telescope.nvim
+""coc-explore
 "
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua reqeuire('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+:nnoremap tt :CocCommand explorer<CR>
 
 colo seoul256
 set background=dark

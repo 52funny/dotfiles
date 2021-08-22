@@ -67,7 +67,11 @@
     "pyright.organizeimports.provider": "isort",
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "/Users/52funny/Library/Python/3.8/bin/autopep8",
-    "prettier.formatterPriority": 1,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.keyMappings.global": {
+        "T": "open:tab",
+        "tt": "quit"
+    },
     "coc.preferences.formatOnSaveFiletypes": [
         "c",
         "cpp",
