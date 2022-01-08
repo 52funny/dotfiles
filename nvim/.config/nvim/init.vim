@@ -118,6 +118,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'tmhedberg/SimpylFold'
 
     Plug 'voldikss/vim-floaterm'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 "

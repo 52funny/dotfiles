@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
-export PATH=$PATH:/Users/52funny/Library/Python/3.8/bin:/Users/52funny/go/bin:/Users/52funny/.deno/bin:$HOME/.cargo/bin/
+export PATH=$PATH:/Users/52funny/Library/Python/3.8/bin:/Users/52funny/go/bin:/Users/52funny/.deno/bin:$HOME/.cargo/bin/:/opt/homebrew/opt/llvm/bin
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/52funny/.oh-my-zsh"
 
