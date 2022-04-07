@@ -62,6 +62,8 @@ nnoremap <LEADER><CR> :nohlsearch<CR>
 "===
 noremap K 5k
 noremap J 5j
+noremap H ^
+noremap L $
 
 "use  jj
 "inoremap jj <ESC>
@@ -89,8 +91,8 @@ map <C-k> <C-w>k
 map <C-j> <C-w>j
 map <C-h> <C-w>h
 map <C-l> <C-w>l
-noremap L :tabn<CR>
-noremap H :tabp<CR>
+noremap <LEADER>L :tabn<CR>
+noremap <LEADER>H :tabp<CR>
 
 call plug#begin('~/.config/nvim/plugged')
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
