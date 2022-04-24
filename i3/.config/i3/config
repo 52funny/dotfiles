@@ -31,7 +31,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Set key repeat
-exec --no-startup-id xset r rate 200 80
+exec --no-startup-id xset r rate 200 50
 
 # Set fcitx5 keyboard
 exec --no-startup-id fcitx5 -d
@@ -51,6 +51,9 @@ exec --no-startup-id utools
 # Set imwheel
 exec --no-startup-id imwheel
 
+# Set copyq
+exec --no-startup-id copyq
+
 
 
 # change volume or toggle mute
@@ -64,6 +67,12 @@ floating_modifier $mod
 # Set rofi
 #bindsym $mod+k exec --no-startup-id rofi -show combi
 bindsym $mod+space exec --no-startup-id rofi -show combi
+
+# bind $mod+tab switch next workspace
+bindsym $mod+Tab workspace next
+
+# bind $mod+shift+tab switch prev workspace
+bindsym $mod+Shift+Tab workspace prev
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
