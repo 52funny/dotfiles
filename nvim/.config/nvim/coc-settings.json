@@ -1,122 +1,148 @@
 {
-  "coc.preferences.enableFloatHighlight": true,
-  "coc.preferences.snippetStatusText": "Ⓢ ",
-  "coc.preferences.extensionUpdateCheck": "daily",
-  "coc.preferences.messageLevel": "error",
-  "coc.source.around.firstMatch": false,
-  "coc.source.buffer.firstMatch": false,
-  "suggest.detailMaxLength": 60,
-  "suggest.noselect": true,
-  "suggest.enablePreselect": false,
-  "suggest.triggerAfterInsertEnter": true,
-  "suggest.autoTrigger": "always",
-  "suggest.timeout": 5000,
-  "suggest.enablePreview": true,
-  "suggest.floatEnable": true,
-  "suggest.detailField": "preview",
-  "suggest.snippetIndicator": "",
-  "suggest.triggerCompletionWait": 100,
-  "suggest.echodocSupport": true,
-  "suggest.completionItemKindLabels": {
-    "class": "\uf0e8",
-    "color": "\ue22b",
-    "constant": "\uf8fe",
-    "default": "\uf29c",
-    "enum": "\uf435",
-    "enumMember": "\uf02b",
-    "event": "\ufacd",
-    "field": "\uf93d",
-    "file": "\uf723",
-    "folder": "\uf115",
-    "function": "\u0192",
-    "interface": "\uf417",
-    "keyword": "\uf1de",
-    "method": "\uf6a6",
-    "module": "\uf40d",
-    "operator": "\uf915",
-    "property": "\ue624",
-    "reference": "\ufa46",
-    "snippet": "\ue60b",
-    "struct": "\ufb44",
-    "text": "\ue612",
-    "typeParameter": "\uf728",
-    "unit": "\uf475",
-    "value": "\uf89f",
-    "variable": "\ue71b"
-  },
-  "diagnostic.errorSign": "\uf467",
-  "diagnostic.warningSign": "\uf071",
-  "diagnostic.infoSign": "\uf129",
-  "diagnostic.hintSign": "\uf864",
-  "diagnostic.displayByAle": false,
-  "diagnostic.refreshOnInsertMode": false,
-  "diagnostic.checkCurrentLine": true,
-  "diagnostic.virtualTextPrefix": " ❯❯❯ ",
-  "diagnostic.virtualText": true,
-  "codeLens.enable": false,
-  "list.previewHighlightGroup": "Statement",
-  "list.nextKeymap": "<C-e>",
-  "list.previousKeymap": "<C-u>",
-  "json.format.enable": true,
-  "tsserver.enable": true,
-  "typescript.format.enabled": true,
-  "javascript.format.enabled": true,
-  "javascript.showUnused": true,
-  "pyright.enable": true,
-  "python.pythonPath": "/opt/homebrew/bin/python3",
-  "pyright.organizeimports.provider": "isort",
-  "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Path": "/Users/52funny/Library/Python/3.8/bin/autopep8",
-  "explorer.icon.enableNerdfont": true,
-  "explorer.keyMappings.global": {
-    "T": "open:tab",
-    "tt": "quit"
-  },
-  "clangd.path": "/opt/homebrew/opt/llvm/bin/clangd",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "c",
-    "cpp",
-    "json",
-    "python",
-    "javascirpt",
-    "html",
-    "go",
-    "py",
-    "rust"
-  ],
-  "snippets.ultisnips.enable": true,
-  "snippets.ultisnips.directories": [
-    "$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/",
-    "$HOME/.config/nvim/UltiSnips/"
-  ],
-  "languageserver": {
-    "clangd": {
-      "command": "clangd",
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+    "coc.preferences.snippetStatusText": "Ⓢ ",
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.messageLevel": "error",
+    "suggest.detailMaxLength": 60,
+    "suggest.noselect": true,
+    "suggest.enablePreselect": false,
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.autoTrigger": "always",
+    "suggest.timeout": 5000,
+    "suggest.detailField": "preview",
+    "suggest.snippetIndicator": "",
+    "notification.disabledProgressSources": [
+        "*"
+    ],
+    "suggest.triggerCompletionWait": 100,
+    "suggest.completionItemKindLabels": {
+        "class": "\uf0e8",
+        "color": "\ue22b",
+        "constant": "\uf8fe",
+        "default": "\uf29c",
+        "enum": "\uf435",
+        "enumMember": "\uf02b",
+        "event": "\ufacd",
+        "field": "\uf93d",
+        "file": "\uf723",
+        "folder": "\uf115",
+        "function": "\u0192",
+        "interface": "\uf417",
+        "keyword": "\uf1de",
+        "method": "\uf6a6",
+        "module": "\uf40d",
+        "operator": "\uf915",
+        "property": "\ue624",
+        "reference": "\ufa46",
+        "snippet": "\ue60b",
+        "struct": "\ufb44",
+        "text": "\ue612",
+        "typeParameter": "\uf728",
+        "unit": "\uf475",
+        "value": "\uf89f",
+        "variable": "\ue71b"
     },
-    "go": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "trace.server": "verbose",
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "ui.diagnostic.staticcheck": true,
-        "ui.diagnostic.analyses": {
-          "ST1000": false
+    "diagnostic.errorSign": "\uf467",
+    "diagnostic.warningSign": "\uf071",
+    "diagnostic.infoSign": "\uf129",
+    "diagnostic.hintSign": "\uf864",
+    "diagnostic.displayByAle": false,
+    "diagnostic.refreshOnInsertMode": false,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.virtualTextPrefix": " ❯❯❯ ",
+    "diagnostic.virtualText": true,
+    "codeLens.enable": false,
+    "list.previewHighlightGroup": "Statement",
+    "list.nextKeymap": "<C-e>",
+    "list.previousKeymap": "<C-u>",
+    "json.format.enable": true,
+    "tsserver.enable": true,
+    "typescript.format.enabled": true,
+    "javascript.format.enabled": true,
+    "javascript.showUnused": true,
+    "pyright.enable": true,
+    "python.pythonPath": "/opt/homebrew/bin/python3",
+    "pyright.organizeimports.provider": "isort",
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Path": "/Users/52funny/Library/Python/3.8/bin/autopep8",
+    "explorer.icon.enableNerdfont": true,
+    "explorer.keyMappings.global": {
+        "T": "open:tab",
+        "tt": "quit"
+    },
+    "clangd.path": "/opt/homebrew/opt/llvm/bin/clangd",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "c",
+        "cpp",
+        "json",
+        "python",
+        "javascirpt",
+        "html",
+        "go",
+        "py",
+        "rust"
+    ],
+    "snippets.ultisnips.enable": true,
+    "snippets.ultisnips.directories": [
+        "$HOME/.config/nvim/plugged/vim-snippets/UltiSnips/",
+        "$HOME/.config/nvim/UltiSnips/"
+    ],
+    "languageserver": {
+        "clangd": {
+            "command": "clangd",
+            "rootPatterns": [
+                "compile_flags.txt",
+                "compile_commands.json"
+            ],
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ]
+        },
+        "go": {
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod"
+            ],
+            "trace.server": "verbose",
+            "filetypes": [
+                "go"
+            ],
+            "initializationOptions": {
+                "ui.diagnostic.staticcheck": true,
+                "ui.diagnostic.analyses": {
+                    "ST1000": false
+                }
+            }
+        },
+        "bash": {
+            "command": "bash-language-server",
+            "args": [
+                "start"
+            ],
+            "filetypes": [
+                "sh"
+            ],
+            "ignoredRootPaths": []
+        },
+        "rust": {
+            "command": "rust-analyzer",
+            "filetypes": [
+                "rust"
+            ],
+            "rootPatterns": [
+                "Cargo.toml"
+            ]
+        },
+        "zls": {
+            "command": "/Users/52funny/zls/zls",
+            "filetypes": [
+                "zig"
+            ]
         }
-      }
     },
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": []
-    },
-    "rust": {
-      "command": "rust-analyzer",
-      "filetypes": ["rust"],
-      "rootPatterns": ["Cargo.toml"]
-    }
-  }
+    "Lua.telemetry.enable": true
 }

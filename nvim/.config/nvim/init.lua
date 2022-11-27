@@ -1,0 +1,12 @@
+require('packer_init')
+require('core.options')
+require('core.keymaps')
+require('core.autorun')
+
+require('plugins.colors')
+require('plugins.indent-blankline')
+require('plugins.nvim-treesitter')
+require('plugins.lazygit_nvim')
+require('plugins.nvim-cmp')
+require('plugins.nvim-lspconfig')
+require('plugins.telescope')
