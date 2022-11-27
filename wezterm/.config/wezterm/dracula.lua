@@ -17,7 +17,7 @@ return {
     -- the foreground color of selected text
     selection_fg = "none",
     -- the background color of selected text
-    selection_bg = "rgba(68,71,90,0.5)",
+    selection_bg = "rgba(138,142,168,0.9)",
 
     -- The color of the scrollbar "thumb"; the portion that represents the current viewport
     scrollbar_thumb = "#44475a",
