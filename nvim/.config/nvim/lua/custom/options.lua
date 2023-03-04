@@ -1,6 +1,10 @@
 -- neovim completion max length
 vim.opt.pumheight = 25
 
+vim.opt.foldmethod = "expr"
+vim.opt.foldlevel = 99
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 
 -- macosime
 vim.g.macosime_cjk_ime = 'com.apple.inputmethod.SCIM.ITABC'
@@ -43,6 +47,7 @@ vim.keymap.set('t', '<C-`>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>'
 
 
 local cmp = require "cmp"
+cmp.mapping.confirm({ select = true })
 cmp.setup {
     completion = {
         completeopt = 'menu,menuone,noinsert'

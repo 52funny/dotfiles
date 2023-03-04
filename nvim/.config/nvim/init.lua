@@ -96,7 +96,7 @@ require('lazy').setup({
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim',          opts = {} },
+    -- { 'folke/which-key.nvim',          opts = {} },
     { -- Adds git releated signs to the gutter, as well as utilities for managing changes
         'lewis6991/gitsigns.nvim',
         opts = {
@@ -110,7 +110,7 @@ require('lazy').setup({
             },
         },
     },
-
+    --
     { -- Theme inspired by Atom
         'navarasu/onedark.nvim',
         priority = 1000,
@@ -131,6 +131,7 @@ require('lazy').setup({
             },
         },
     },
+
 
     { -- Add indentation guides even on blank lines
         'lukas-reineke/indent-blankline.nvim',
@@ -167,7 +168,8 @@ require('lazy').setup({
             'nvim-treesitter/nvim-treesitter-textobjects',
         },
         config = function()
-            pcall(require('nvim-treesitter.install').update { with_sync = true })
+            -- close the prompt when start neovim
+            -- pcall(require('nvim-treesitter.install').update { with_sync = true })
         end,
     },
 
@@ -192,7 +194,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = true
+vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
@@ -577,15 +579,26 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help, {
     border = _border
-}
-)
+})
 
 vim.diagnostic.config {
     float = { border = _border }
 }
 
+-- call self config
+--
+require('index').setup(on_attach, capabilities)
 
-
-require('custom.keymap')
-require('custom.autocmd')
-require('custom.options')
+-- local lspconfig = require("lspconfig")
+-- lspconfig.clangd.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = {
+--         "clangd",
+--         "--clang-tidy",
+--         "--function-arg-placeholders=false",
+--         "--fallback-style=microsoft",
+--         "-j=16"
+--
+--     },
+-- }

@@ -3,3 +3,4 @@ nvim/.config/nvim/plugged/
 
 wezterm/.config/wezterm/log
 nvim/.config/nvim/plugin
+nvim/.config/nvim/lazy-lock.json
