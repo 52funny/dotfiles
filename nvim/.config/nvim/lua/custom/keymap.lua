@@ -12,6 +12,7 @@ vim.keymap.set({ 'n', 'v' }, 'L', '$')
 vim.keymap.set('v', 'Y', '"+y')
 vim.keymap.set({ 'n', 'v' }, 's', '<nop>')
 
+vim.keymap.set('n', '<leader><cr>', ':nohlsearch<cr>')
 
 vim.keymap.set({ 'n' }, 'sl', ':set nosplitright<cr>:vsplit<cr>')
 vim.keymap.set({ 'n' }, 'sr', ':set splitright<cr>:vsplit<cr>')
