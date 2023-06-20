@@ -1,15 +1,17 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=$PATH:/Users/52funny/Library/Python/3.8/bin:/Users/52funny/go/bin:/Users/52funny/.deno/bin:$HOME/.cargo/bin/:/opt/homebrew/opt/llvm/bin
+export PATH=/opt/homebrew/bin:$PATH:/Users/52funny/Android/platform-tools
+export PATH=$PATH:/Users/52funny/Library/Python/3.8/bin:/Users/52funny/go/bin:$HOME/.cargo/bin/:/opt/homebrew/opt/llvm/bin
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/52funny/.oh-my-zsh"
+
+#set term
+export TERM="xterm-256color"
 
 # For Homebrew ustc mirrors
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # For autojump
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # For fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -80,6 +82,7 @@ ZSH_THEME="ys"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
+	z
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 )
@@ -122,3 +125,7 @@ alias cls=clear
 alias s=neofetch
 alias tnew="tmux new -t"
 alias ra=ranger
+alias j=z
+alias jo=joshuto
+
+eval "$(starship init zsh)"
