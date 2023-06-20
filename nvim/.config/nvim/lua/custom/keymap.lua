@@ -31,6 +31,7 @@ vim.keymap.set({ 't' }, '<Esc>', '<C-\\><C-n>')
 -- vim.keymap.set({ 'n', 'v' }, 'L', ":tabnext<cr>")
 
 -- lazygit
-vim.keymap.set('n', '<leader>lg', ':LazyGit<cr>')
+vim.keymap.set('n', '<leader>lg', ':LazyGit<cr>', { noremap = true })
 
--- vim.keymap.set('n', '<C-`>', ':lua print("hello")<cr>')
+vim.keymap.set('n', '<leader>e', ':lua vim.diagnostic.open_float(0, {scope="line"})<CR>',
+  { silent = true, noremap = true })

@@ -1,7 +1,7 @@
 require('custom.keymap')
-require('custom.autocmd')
+-- require('custom.autocmd')
 require('custom.options')
-require('custom.colorscheme')
+-- require('custom.colorscheme')
 
 local M = {}
 
