@@ -84,7 +84,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {}, tag = "legacy" },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,22 +113,16 @@ require('lazy').setup({
       },
     },
   },
-  --
   -- {
-  --   -- Theme inspired by Atom
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
+  --   'junegunn/seoul256.vim'
+  --   ,
   --   config = function()
-  --     vim.cmd.colorscheme 'onedark'
-  --   end,
+  --     vim.cmd('colorscheme seoul256')
+  --     vim.g.seoul256_background = 236
+  --     -- vim.g.seoul256_background = 233
+  --   end
+  --
   -- },
-  {
-    'luisiacc/gruvbox-baby',
-    priority = 1000,
-    config = function()
-      vim.cmd('colorscheme gruvbox-baby')
-    end
-  },
 
   {
     -- Set lualine as statusline
@@ -238,7 +232,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+-- vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -250,8 +244,8 @@ vim.o.termguicolors = true
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -424,15 +418,19 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  rust_analyzer = {
-    ["rust_analyzer"] = {
-      completion = {
-        callback = {
-          snippets = "add_parentheses"
-        }
-      },
-    }
-  },
+  -- rust_analyzer = {
+  --   -- ["rust_analyzer"] = {
+  --   checkOnSave = {
+  --     command = "clippy"
+  --   },
+  --   completion = {
+  --     callback = {
+  --       snippets = "add_parentheses"
+  --     }
+  --   },
+  --
+  --   -- }
+  -- },
   -- tsserver = {},
 
   lua_ls = {
@@ -471,145 +469,7 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- nvim-cmp setup
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
-
-luasnip.config.setup {}
-
-local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = ""
-}
-
-
-cmp.setup {
-  view = {
-    entries = "custom"
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-
-
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-
-  formatting = {
-    format = function(entry, vim_item)
-      local prsnt, lspkind = pcall(require, "lspkind")
-      if not prsnt then
-        -- From kind_icons array
-        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      else
-        -- From lspkind
-        return lspkind.cmp_format()
-      end
-      -- Source
-      vim_item.menu = ({
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
-        nvim_lua = "[Lua]",
-        latex_symbols = "[LaTeX]",
-      })[entry.source.name]
-
-      return vim_item
-    end
-  },
-
-  mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-}
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
---
-local _border = "single"
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = _border
-  }
-)
-
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-  vim.lsp.handlers.signature_help, {
-    border = _border
-  })
-
-vim.diagnostic.config {
-  float = { border = _border }
-}
 
 -- call self config
 --
 require('index').setup(on_attach, capabilities)
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-    underline = true,
-  }
-)
-

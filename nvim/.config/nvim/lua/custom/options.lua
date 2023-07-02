@@ -4,6 +4,20 @@ vim.opt.pumheight = 25
 vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.undofile = true
+vim.opt.scrolloff = 10
+vim.opt.termguicolors = true
+
+-- vim.opt.background = 'dark'
+-- vim.cmd('set background=dark')
+
+
 
 
 -- macosime
@@ -38,118 +52,132 @@ vim.keymap.set('n', '<C-`>', '<CMD>lua require("FTerm").toggle()<CR>')
 vim.keymap.set('t', '<C-`>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 
 
-local cmp = require "cmp"
-local luasnip = require "luasnip"
-cmp.mapping.confirm({ select = true })
-cmp.setup {
-    completion = {
-        completeopt = 'menu,menuone,noinsert'
-    }
-}
 
--- neovim cmp border settings
---
+-- nvim-cmp setup
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+
+luasnip.config.setup {}
+
 local kind_icons = {
     Text = "",
-    Method = "",
-    Function = "",
+    Method = "󰆧",
+    Function = "󰊕",
     Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "ﴯ",
+    Field = "󰇽",
+    Variable = "󰂡",
+    Class = "󰠱",
     Interface = "",
     Module = "",
-    Property = "ﰠ",
+    Property = "󰜢",
     Unit = "",
-    Value = "",
+    Value = "󰎠",
     Enum = "",
-    Keyword = "",
+    Keyword = "󰌋",
     Snippet = "",
-    Color = "",
-    File = "",
+    Color = "󰏘",
+    File = "󰈙",
     Reference = "",
-    Folder = "",
+    Folder = "󰉋",
     EnumMember = "",
-    Constant = "",
+    Constant = "󰏿",
     Struct = "",
     Event = "",
-    Operator = "",
-    TypeParameter = ""
+    Operator = "󰆕",
+    TypeParameter = "󰅲",
+}
+local has_words_before = function()
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
+
+
+cmp.setup {
+    view = {
+        entries = "custom"
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    -- completion = {
+    --     preselect = 'none',
+    --     completeopt = "menuone",
+    -- },
+
+    sorting = {
+        comparators = {
+            cmp.config.compare.exact,
+            cmp.config.compare.length,
+            -- cmp.config.compare.exact,
+            -- cmp.config.compare.offset,
+            -- cmp.config.compare.kind,
+        }
+    },
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
+
+    mapping = cmp.mapping.preset.insert {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete {},
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = function(fallback)
+            if not cmp.select_next_item() then
+                if vim.bo.buftype ~= 'prompt' and has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end
+        end,
+
+        ['<S-Tab>'] = function(fallback)
+            if not cmp.select_prev_item() then
+                if vim.bo.buftype ~= 'prompt' and has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end
+        end,
+    },
+    sources = {
+        { name = "copilot" },
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+    },
 }
 
-
--- cmp.setup {
---     view = {
---         entries = "custom"
---     },
---     window = {
---         completion = cmp.config.window.bordered(),
---         documentation = cmp.config.window.bordered(),
---     },
---
---
---     snippet = {
---         expand = function(args)
---             luasnip.lsp_expand(args.body)
---         end,
---     },
---
---     formatting = {
---         format = function(entry, vim_item)
---             local prsnt, lspkind = pcall(require, "lspkind")
---             if not prsnt then
---                 -- From kind_icons array
---                 vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
---             else
---                 -- From lspkind
---                 return lspkind.cmp_format()
---             end
---             -- Source
---             vim_item.menu = ({
---                 buffer = "[Buffer]",
---                 nvim_lsp = "[LSP]",
---                 luasnip = "[LuaSnip]",
---                 nvim_lua = "[Lua]",
---                 latex_symbols = "[LaTeX]",
---             })[entry.source.name]
---
---             return vim_item
---         end
---     },
---
---     mapping = cmp.mapping.preset.insert {
---         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
---         ['<C-f>'] = cmp.mapping.scroll_docs(4),
---         ['<C-Space>'] = cmp.mapping.complete {},
---         ['<CR>'] = cmp.mapping.confirm {
---             behavior = cmp.ConfirmBehavior.Replace,
---             select = true,
---         },
---         ['<Tab>'] = cmp.mapping(function(fallback)
---             if cmp.visible() then
---                 cmp.select_next_item()
---             elseif luasnip.expand_or_jumpable() then
---                 luasnip.expand_or_jump()
---             else
---                 fallback()
---             end
---         end, { 'i', 's' }),
---         ['<S-Tab>'] = cmp.mapping(function(fallback)
---             if cmp.visible() then
---                 cmp.select_prev_item()
---             elseif luasnip.jumpable(-1) then
---                 luasnip.jump(-1)
---             else
---                 fallback()
---             end
---         end, { 'i', 's' }),
---     },
---     sources = {
---         { name = 'nvim_lsp' },
---         { name = 'luasnip' },
---     },
--- }
---
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 --
+local _border = "single"
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+        border = _border
+    }
+)
+
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+        border = _border
+    })
+
+vim.diagnostic.config {
+    float = { border = _border }
+}

@@ -27,6 +27,8 @@ vim.keymap.set({ 'n', 'v' }, '<C-l>', '<C-w>l')
 
 vim.keymap.set({ 't' }, '<Esc>', '<C-\\><C-n>')
 
+vim.keymap.set({ 'n' }, '<leader>r', ':luafile $MYVIMRC<CR>', { noremap = true, silent = true })
+
 -- vim.keymap.set({ 'n', 'v' }, 'H', ":tabprevious<cr>")
 -- vim.keymap.set({ 'n', 'v' }, 'L', ":tabnext<cr>")
 

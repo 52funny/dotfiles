@@ -27,8 +27,6 @@ return {
     },
   },
 
-  { 'catppuccin/nvim',    as = 'catppuccin' },
-
   -- floaterm
   { 'numToStr/FTerm.nvim' },
 
@@ -37,6 +35,41 @@ return {
     'anuvyklack/pretty-fold.nvim',
     config = function()
       require('pretty-fold').setup({})
+    end
+  },
+  -- rust-tools
+  {
+    "simrat39/rust-tools.nvim"
+  },
+  -- colorscheme
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    integrations = {
+      gitsigns = true,
+    },
+    config = function()
+      require('catppuccin').setup({
+        flavour = "mocha",
+        background = {
+          light = "latte",
+          dark = "mocha",
+        },
+        no_italic = true,
+      })
+      vim.cmd('colorscheme catppuccin')
+    end
+  },
+  -- force terminal color same to nvim
+  { "typicode/bg.nvim",   lazy = false },
+
+  -- github copilot
+  {
+    "github/copilot.vim",
+    config = function()
+      vim.g.copilot_no_tab_map = true
+      vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
     end
   }
 }
