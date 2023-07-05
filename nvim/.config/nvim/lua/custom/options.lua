@@ -14,18 +14,13 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 10
 vim.opt.termguicolors = true
 
--- vim.opt.background = 'dark'
--- vim.cmd('set background=dark')
-
-
-
 
 -- macosime
 vim.g.macosime_cjk_ime = 'com.apple.inputmethod.SCIM.ITABC'
 vim.g.macosime_normal_ime = 'com.apple.keylayout.ABC'
 
 -- nvim-tree setup
-vim.keymap.set('n', 'tt', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', 'tt', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
     renderer = {
@@ -86,25 +81,22 @@ local kind_icons = {
     Operator = "󰆕",
     TypeParameter = "󰅲",
 }
+
 local has_words_before = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-
-
 cmp.setup {
     view = {
-        entries = "custom"
+        entries = { name = "custom", selection_order = "near_cursor" }
     },
     window = {
         completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered({
+            zindex = 1000,
+        }),
     },
     -- completion = {
     --     preselect = 'none',
