@@ -16,6 +16,12 @@ return {
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup {}
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local cmp = require('cmp')
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
     end
   },
 
@@ -71,5 +77,13 @@ return {
       vim.g.copilot_no_tab_map = true
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
     end
+  },
+  -- nvim-dap
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "theHamsta/nvim-dap-virtual-text",
+    }
   }
 }

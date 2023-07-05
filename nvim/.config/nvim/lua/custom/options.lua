@@ -1,6 +1,5 @@
 -- neovim completion max length
 vim.opt.pumheight = 25
-
 vim.opt.foldmethod = "expr"
 vim.opt.foldlevel = 99
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -90,12 +89,15 @@ end
 
 cmp.setup {
     view = {
-        entries = { name = "custom", selection_order = "near_cursor" }
+        entries = { name = "custom", selection_order = "top_down" }
     },
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered({
-            zindex = 1000,
+            zindex = 900,
+            max_height = 0,
+            max_width = 0,
+            scrollbar = false,
         }),
     },
     -- completion = {

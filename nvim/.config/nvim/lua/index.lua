@@ -1,6 +1,7 @@
 require('custom.keymap')
 require('custom.autocmd')
 require('custom.options')
+require('custom.dap')
 
 local M = {}
 
