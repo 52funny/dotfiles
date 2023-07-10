@@ -16,12 +16,12 @@ return {
     'windwp/nvim-autopairs',
     config = function()
       require('nvim-autopairs').setup {}
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local cmp = require('cmp')
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
+      -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      -- local cmp = require('cmp')
+      -- cmp.event:on(
+      --   'confirm_done',
+      --   cmp_autopairs.on_confirm_done()
+      -- )
     end
   },
 
@@ -48,25 +48,25 @@ return {
     "simrat39/rust-tools.nvim"
   },
   -- colorscheme
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    integrations = {
-      gitsigns = true,
-    },
-    config = function()
-      require('catppuccin').setup({
-        flavour = "mocha",
-        background = {
-          light = "latte",
-          dark = "mocha",
-        },
-        no_italic = true,
-      })
-      vim.cmd('colorscheme catppuccin')
-    end
-  },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   integrations = {
+  --     gitsigns = true,
+  --   },
+  --   config = function()
+  --     require('catppuccin').setup({
+  --       flavour = "mocha",
+  --       background = {
+  --         light = "latte",
+  --         dark = "mocha",
+  --       },
+  --       no_italic = true,
+  --     })
+  --     vim.cmd('colorscheme catppuccin')
+  --   end
+  -- },
   -- force terminal color same to nvim
   { "typicode/bg.nvim",   lazy = false },
 
@@ -85,5 +85,35 @@ return {
       "mfussenegger/nvim-dap",
       "theHamsta/nvim-dap-virtual-text",
     }
-  }
+  },
+  -- { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown", },
+    build = "yarn install",
+    config = function()
+      vim.g.instant_markdown_autostart = 0
+    end
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      require("gruvbox").setup({
+        italic = {
+          strings = false,
+          comments = false,
+          operators = false,
+          folds = false,
+        },
+      })
+      vim.cmd([[colorscheme gruvbox]])
+      -- vim.cmd([[set background=light]])
+      -- vim.cmd([[set background=dark]])
+    end
+  },
+  -- latex
+  -- {
+  --
+  -- }
 }

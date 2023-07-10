@@ -64,8 +64,15 @@ vim.api.nvim_set_var("copilot_filetypes", {
   ["dap-repl"] = false,
 })
 local dapui = require("dapui")
-require("nvim-dap-virtual-text").setup()
+require("nvim-dap-virtual-text").setup({})
 
+--#region
+--
+--
+-- \begin{aligned}
+--  x_1 = 1
+--  x_2 = 2
+-- \end{aligned}
 local opts = { noremap = true, silent = true };
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, opts)
 vim.keymap.set("n", "<leader>du", dapui.toggle, opts)
