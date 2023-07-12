@@ -88,6 +88,18 @@ return {
                     operators = false,
                     folds = false,
                 },
+                -- fix Sign color problem
+                -- refer https://github.com/ellisonleao/gruvbox.nvim/issues/230
+                overrides = {
+                    SignColumn = { link = "Normal" },
+                    GruvboxGreenSign = { bg = "" },
+                    GruvboxOrangeSign = { bg = "" },
+                    GruvboxPurpleSign = { bg = "" },
+                    GruvboxYellowSign = { bg = "" },
+                    GruvboxRedSign = { bg = "" },
+                    GruvboxBlueSign = { bg = "" },
+                    GruvboxAquaSign = { bg = "" },
+                },
             })
             vim.cmd([[colorscheme gruvbox]])
             -- vim.cmd([[set background=light]])
@@ -112,5 +124,33 @@ return {
                 shell = vim.o.shell, -- change the default shell
             }
         end
-    }
+    },
+    -- {
+    --     "lvimuser/lsp-inlayhints.nvim",
+    --     config = function()
+    --         require("lsp-inlayhints").setup {
+    --             -- highlight = "Comment",
+    --             -- prefix = " » ",
+    --             -- aligned = false,
+    --             -- only_current_line = false,
+    --             -- enabled = { "ChainingHint", "TypeHint", "ParameterHint" },
+    --         }
+    --         vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+    --         vim.api.nvim_create_autocmd("LspAttach", {
+    --             group = "LspAttach_inlayhints",
+    --             callback = function(args)
+    --                 if not (args.data and args.data.client_id) then
+    --                     return
+    --                 end
+    --
+    --                 local bufnr = args.buf
+    --                 local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --                 local inlayhints = require("lsp-inlayhints");
+    --                 -- inlayhints.setup()
+    --                 inlayhints.on_attach(client, bufnr)
+    --             end,
+    --         })
+    --     end
+    -- }
+
 }
