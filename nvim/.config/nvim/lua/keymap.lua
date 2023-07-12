@@ -1,7 +1,7 @@
 -- keymap
 vim.keymap.set('n', 'S', ':w<cr>')
 vim.keymap.set('n', 'Q', ':q!<cr>')
-vim.keymap.set('n', 'R', ':so<cr>')
+-- vim.keymap.set('n', 'R', ':so<cr>')
 
 vim.keymap.set({ 'n', 'v' }, 'J', '5j')
 vim.keymap.set({ 'n', 'v' }, 'K', '5k')
@@ -27,7 +27,7 @@ vim.keymap.set({ 'n', 'v' }, '<C-l>', '<C-w>l')
 
 vim.keymap.set({ 't' }, '<Esc>', '<C-\\><C-n>')
 
-vim.keymap.set({ 'n' }, '<leader>r', ':luafile $MYVIMRC<CR>', { noremap = true, silent = true })
+-- vim.keymap.set({ 'n' }, '<leader>r', ':luafile $MYVIMRC<CR>', { noremap = true, silent = true })
 
 -- vim.keymap.set({ 'n', 'v' }, 'H', ":tabprevious<cr>")
 -- vim.keymap.set({ 'n', 'v' }, 'L', ":tabnext<cr>")
@@ -36,4 +36,4 @@ vim.keymap.set({ 'n' }, '<leader>r', ':luafile $MYVIMRC<CR>', { noremap = true, 
 vim.keymap.set('n', '<leader>lg', ':LazyGit<cr>', { noremap = true })
 
 vim.keymap.set('n', '<leader>e', ':lua vim.diagnostic.open_float(0, {scope="line"})<CR>',
-  { silent = true, noremap = true })
+    { silent = true, noremap = true })
