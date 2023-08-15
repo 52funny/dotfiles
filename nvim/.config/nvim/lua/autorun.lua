@@ -63,35 +63,62 @@ local runner_map = {
     go = "go run ."
 }
 
-function Run()
+local pid        = nil
+local runner     = nil
+local function Run()
     local current_win = vim.api.nvim_get_current_win()
     local filetype    = vim.bo.filetype
+    local buftype     = vim.bo.buftype
     local cmd         = runner_map[filetype]
+
+    if buftype == 'terminal' and pid ~= nil and runner ~= nil then
+        -- vim.fn.jobstop(pid)
+        runner:shutdown()
+        pid = nil
+        return
+    end
+
 
     if not cmd then
         print("Can't run current filetype")
         return
     end
-    local runner = Terminal:new({
-        cmd = cmd,
-        hidden = true,
-        auto_scroll = true,
-        close_on_exit = false,
-        on_open = function(term)
-            -- vim.cmd('stopinsert')
-            -- vim.api.nvim_feedkeys("<cmd>", "n", false)
-            -- vim.cmd("<>startinsert!")
-        end
-    })
 
+    if runner == nil then
+        runner = Terminal:new({
+            direction = 'float',
+            float_opts = {
+                border = 'single',
+                -- width = 0.9,
+                height = vim.fn.floor(vim.o.columns / 2),
+                winblend = 3,
+                highlights = {
+                    border = "Normal",
+                    background = "Normal",
+                }
+            },
+            cmd = cmd,
+            hidden = true,
+            auto_scroll = true,
+            close_on_exit = false,
+            on_open = function(term)
+                vim.cmd('stopinsert')
+                -- vim.api.nvim_feedkeys("<cmd>", "n", false)
+                -- vim.cmd("<>startinsert!")
+            end
+        })
+    end
 
     runner:toggle()
-    -- vim.api.nvim_set_current_win(current_win)
+    pid = runner.job_id
+
+    --vim.api.nvim_set_current_win(current_win)
 end
 
 vim.api.nvim_create_user_command("Run", function()
     Run()
 end, {})
+
 
 
 vim.keymap.set("n", "R", Run, {})

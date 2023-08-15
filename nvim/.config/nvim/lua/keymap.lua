@@ -7,9 +7,10 @@ vim.keymap.set({ 'n', 'v' }, 'J', '5j')
 vim.keymap.set({ 'n', 'v' }, 'K', '5k')
 
 vim.keymap.set({ 'n', 'v' }, 'H', '^')
-vim.keymap.set({ 'n', 'v' }, 'L', '$')
+vim.keymap.set({ 'n', 'v' }, 'L', 'g_')
 
 vim.keymap.set('v', 'Y', '"+y')
+
 vim.keymap.set({ 'n', 'v' }, 's', '<nop>')
 
 vim.keymap.set('n', '<leader><cr>', ':nohlsearch<cr>')
@@ -42,3 +43,6 @@ vim.keymap.set({ 't' }, '<Esc>', '<C-\\><C-n>')
 -- lsp error float windows
 vim.keymap.set('n', '<leader>e', ':lua vim.diagnostic.open_float(0, {scope="line"})<CR>',
     { silent = true, noremap = true })
+
+-- format
+vim.keymap.set('n', "F", ":Format<CR>", { silent = true, noremap = true })

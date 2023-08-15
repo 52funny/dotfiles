@@ -42,29 +42,29 @@ cmp.setup {
     view = {
         entries = { name = "custom", selection_order = "top_down" }
     },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered({
-            zindex = 900,
-            max_height = 0,
-            max_width = 0,
-            scrollbar = false,
-        }),
-    },
+    -- window = {
+    --     completion = cmp.config.window.bordered(),
+    --     documentation = cmp.config.window.bordered({
+    --         zindex = 900,
+    --         max_height = 0,
+    --         max_width = 0,
+    --         scrollbar = false,
+    --     }),
+    -- },
     -- completion = {
     --     preselect = 'none',
     --     completeopt = "menuone",
     -- },
 
-    sorting = {
-        comparators = {
-            cmp.config.compare.exact,
-            cmp.config.compare.length,
-            -- cmp.config.compare.exact,
-            -- cmp.config.compare.offset,
-            -- cmp.config.compare.kind,
-        }
-    },
+    -- sorting = {
+    --     comparators = {
+    --         -- cmp.config.compare.exact,
+    --         -- cmp.config.compare.length,
+    --         -- cmp.config.compare.exact,
+    --         -- cmp.config.compare.offset,
+    --         -- cmp.config.compare.kind,
+    --     }
+    -- },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
