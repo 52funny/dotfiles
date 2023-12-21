@@ -45,4 +45,4 @@ vim.keymap.set('n', '<leader>e', ':lua vim.diagnostic.open_float(0, {scope="line
     { silent = true, noremap = true })
 
 -- format
-vim.keymap.set('n', "F", ":Format<CR>", { silent = true, noremap = true })
+-- vim.keymap.set('n', "<leader>F", ":Format<CR>", { silent = true, noremap = true })

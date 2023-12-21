@@ -4,44 +4,18 @@ local luasnip = require 'luasnip'
 
 luasnip.config.setup {}
 
-local kind_icons = {
-    Text = "",
-    Method = "󰆧",
-    Function = "󰊕",
-    Constructor = "",
-    Field = "󰇽",
-    Variable = "󰂡",
-    Class = "󰠱",
-    Interface = "",
-    Module = "",
-    Property = "󰜢",
-    Unit = "",
-    Value = "󰎠",
-    Enum = "",
-    Keyword = "󰌋",
-    Snippet = "",
-    Color = "󰏘",
-    File = "󰈙",
-    Reference = "",
-    Folder = "󰉋",
-    EnumMember = "",
-    Constant = "󰏿",
-    Struct = "",
-    Event = "",
-    Operator = "󰆕",
-    TypeParameter = "󰅲",
-}
-
 local has_words_before = function()
     unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+
 cmp.setup {
-    view = {
-        entries = { name = "custom", selection_order = "top_down" }
-    },
+    -- view = {
+    --     entries = { name = "custom", selection_order = "top_down" }
+    -- },
+    preselect = cmp.PreselectMode.Item,
     -- window = {
     --     completion = cmp.config.window.bordered(),
     --     documentation = cmp.config.window.bordered({
@@ -51,19 +25,16 @@ cmp.setup {
     --         scrollbar = false,
     --     }),
     -- },
-    -- completion = {
-    --     preselect = 'none',
-    --     completeopt = "menuone",
-    -- },
-
+    --
     -- sorting = {
-    --     comparators = {
-    --         -- cmp.config.compare.exact,
-    --         -- cmp.config.compare.length,
-    --         -- cmp.config.compare.exact,
-    --         -- cmp.config.compare.offset,
-    --         -- cmp.config.compare.kind,
-    --     }
+    --     comparators     = {
+    --         cmp.config.compare.exact,
+    --         cmp.config.compare.length,
+    --         cmp.config.compare.exact,
+    --         cmp.config.compare.offset,
+    --         cmp.config.compare.kind,
+    --     },
+    --     priority_weight = 1,
     -- },
     snippet = {
         expand = function(args)

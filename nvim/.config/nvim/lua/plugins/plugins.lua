@@ -46,8 +46,6 @@ return {
         "simrat39/rust-tools.nvim"
     },
 
-    -- force terminal color same to nvim
-    { "typicode/bg.nvim", lazy = false },
 
     -- github copilot
     {
@@ -76,36 +74,74 @@ return {
             vim.g.instant_markdown_autostart = 0
         end
     },
+    -- force terminal color same to nvim
+    -- { "typicode/bg.nvim", lazy = false },
 
+    -- {
+    --     "ellisonleao/gruvbox.nvim",
+    --     priority = 1000,
+    --     config = function()
+    --         require("gruvbox").setup({
+    --             italic = {
+    --                 strings = false,
+    --                 comments = false,
+    --                 operators = false,
+    --                 folds = false,
+    --             },
+    --             -- fix Sign color problem
+    --             -- refer https://github.com/ellisonleao/gruvbox.nvim/issues/230
+    --             overrides = {
+    --                 SignColumn = { link = "Normal" },
+    --                 GruvboxGreenSign = { bg = "" },
+    --                 GruvboxOrangeSign = { bg = "" },
+    --                 GruvboxPurpleSign = { bg = "" },
+    --                 GruvboxYellowSign = { bg = "" },
+    --                 GruvboxRedSign = { bg = "" },
+    --                 GruvboxBlueSign = { bg = "" },
+    --                 GruvboxAquaSign = { bg = "" },
+    --             },
+    --         })
+    --         vim.cmd([[colorscheme gruvbox]])
+    --         -- vim.cmd([[set background=light]])
+    --         -- vim.cmd([[set background=dark]])
+    --     end
+    -- },
+    --
+    -- {
+    --     "bluz71/vim-moonfly-colors",
+    --     name = "moonfly",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd([[colorscheme moonfly]])
+    --     end
+    -- },
+    --
+    -- {
+    --     "morhetz/gruvbox",
+    --     name = "gruvbox",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd([[colorscheme gruvbox]])
+    --     end
+    -- },
     {
-        "ellisonleao/gruvbox.nvim",
+        'sainnhe/gruvbox-material',
+        -- name = "seoul256",
+        lazy = false,
         priority = 1000,
+
+        dependencies = {
+            "rktjmp/lush.nvim",
+        },
         config = function()
-            require("gruvbox").setup({
-                italic = {
-                    strings = false,
-                    comments = false,
-                    operators = false,
-                    folds = false,
-                },
-                -- fix Sign color problem
-                -- refer https://github.com/ellisonleao/gruvbox.nvim/issues/230
-                overrides = {
-                    SignColumn = { link = "Normal" },
-                    GruvboxGreenSign = { bg = "" },
-                    GruvboxOrangeSign = { bg = "" },
-                    GruvboxPurpleSign = { bg = "" },
-                    GruvboxYellowSign = { bg = "" },
-                    GruvboxRedSign = { bg = "" },
-                    GruvboxBlueSign = { bg = "" },
-                    GruvboxAquaSign = { bg = "" },
-                },
-            })
-            vim.cmd([[colorscheme gruvbox]])
-            -- vim.cmd([[set background=light]])
-            -- vim.cmd([[set background=dark]])
+            vim.cmd([[colorscheme gruvbox-material]])
         end
     },
+
+
+
     {
         "akinsho/toggleterm.nvim",
         config = function()

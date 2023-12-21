@@ -113,19 +113,8 @@ require('lazy').setup({
       },
     },
   },
-  -- {
-  --   'junegunn/seoul256.vim'
-  --   ,
-  --   config = function()
-  --     vim.cmd('colorscheme seoul256')
-  --     vim.g.seoul256_background = 236
-  --     -- vim.g.seoul256_background = 233
-  --   end
-  --
-  -- },
-
   {
-    -- Set lualine as statusline
+    --   -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -144,9 +133,16 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
+    main = "ibl",
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+      indent = {
+        char = '┊',
+      },
+      scope = {
+        enabled = false,
+      }
+      -- char = '┊',
+      -- show_trailing_blankline_indent = false,
     },
   },
 
