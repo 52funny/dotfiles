@@ -126,19 +126,19 @@ return {
     --         vim.cmd([[colorscheme gruvbox]])
     --     end
     -- },
-    {
-        'sainnhe/gruvbox-material',
-        -- name = "seoul256",
-        lazy = false,
-        priority = 1000,
-
-        dependencies = {
-            "rktjmp/lush.nvim",
-        },
-        config = function()
-            vim.cmd([[colorscheme gruvbox-material]])
-        end
-    },
+    -- {
+    --     'sainnhe/gruvbox-material',
+    --     -- name = "seoul256",
+    --     lazy = false,
+    --     priority = 1000,
+    --
+    --     dependencies = {
+    --         "rktjmp/lush.nvim",
+    --     },
+    --     config = function()
+    --         vim.cmd([[colorscheme gruvbox-material]])
+    --     end
+    -- },
 
 
 
