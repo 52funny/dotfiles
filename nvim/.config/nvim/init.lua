@@ -1067,7 +1067,7 @@ require('lazy').setup({
   { import = 'custom.plugins.lazygit' },
   { import = 'custom.plugins.nvim-surround' },
   { import = 'custom.plugins.copilot' },
-  -- require 'custom.plugins.copilot',
+  { import = 'custom.plugins.wildfire' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
