@@ -1067,11 +1067,12 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  { import = 'custom.plugins.lazygit' },
-  { import = 'custom.plugins.nvim-surround' },
-  { import = 'custom.plugins.copilot' },
-  { import = 'custom.plugins.wildfire' },
-  { import = 'custom.plugins.vimtex' },
+  require 'custom.plugins.lazygit',
+  require 'custom.plugins.nvim-surround',
+  require 'custom.plugins.copilot',
+  require 'custom.plugins.wildfire',
+  require 'custom.plugins.vimtex',
+  require 'custom.plugins.tabline',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
