@@ -8,3 +8,6 @@ vim.keymap.set({ 'n', 'v' }, 'K', '5k')
 
 vim.keymap.set({ 'n', 'v' }, 'H', '^')
 vim.keymap.set({ 'n', 'v' }, 'L', 'g_')
+
+-- Copy to system clipboard for Bob tranlate apps
+vim.keymap.set({ 'n', 'v', 'i' }, '<D-c>', '"+y', { silent = true })
