@@ -1,0 +1,74 @@
+#!/usr/bin/env sh
+
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+#
+# see this wiki page for information:
+#  - https://github.com/asmvik/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
+#
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+#
+
+# global settings
+yabai -m config                                 \
+    external_bar                 off:40:0       \
+    menubar_opacity              1.0            \
+    mouse_follows_focus          off            \
+    focus_follows_mouse          off            \
+    display_arrangement_order    default        \
+    window_origin_display        default        \
+    window_placement             second_child   \
+    window_insertion_point       focused        \
+    window_zoom_persist          on             \
+    window_shadow                on             \
+    window_animation_duration    0.0            \
+    window_animation_easing      ease_out_circ  \
+    window_opacity_duration      0.0            \
+    active_window_opacity        1.0            \
+    normal_window_opacity        0.95           \
+    window_opacity               off            \
+    insert_feedback_color        0xffd75f5f     \
+    split_ratio                  0.50           \
+    split_type                   auto           \
+    auto_balance                 off            \
+    top_padding                  0             \
+    bottom_padding               0             \
+    left_padding                 0             \
+    right_padding                0             \
+    window_gap                   05             \
+    layout                       bsp            \
+    mouse_modifier               fn             \
+    mouse_action1                move           \
+    mouse_action2                resize         \
+    mouse_drop_action            swap
+
+# Signals
+# Auto stacking windows
+# yabai -m signal --add event=window_focused action="yabai -m window $YABAI_WINDOW_ID --insert stack"
+# yabai -m signal --add event=application_front_switched action='yabai -m window --insert stack'
+# yabai -m signal --add event=window_destroyed action='yabai -m window --insert stack'
+# yabai -m signal --add event=application_terminated action='yabai -m window --insert stack'
+
+yabai -m signal --add event=window_destroyed action="\
+  CURRENT_DISPLAY=$(yabai -m query --displays --display | jq '.index'); \
+  if [ $CURRENT_DISPLAY -ne 1 ]; then \
+    WINDOW_COUNT=$(yabai -m query --windows --display $CURRENT_DISPLAY | jq 'length'); \
+    if [ $WINDOW_COUNT -eq 0 ]; then \
+      yabai -m display --focus 1; \
+    fi; \
+  fi"
+
+
+noManageApps='^(微信|系统设置|访达|音乐|QQ|Raycast|Surge Dashboard|Surge|Dash|Telegram)$'
+yabai -m rule --add app="${noManageApps}" manage=off
+yabai -m rule --add app="^kitty$" focus=on
+# yabai -m rule --add app="Finder" manage=off
+# yabai -m rule --add app="Google Chrome" grid=1:2:0:0:1:1
+# yabai -m rule --add app="kitty" grid=1:2:1:0:1:1
+
+
+# yabai -m rule --add app=".*" space=^
+
+echo "yabai configuration loaded.."
