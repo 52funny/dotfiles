@@ -8,31 +8,31 @@ return {
     ---@type ibl.config
     opts = {},
     config = function()
-      -- local highlight = {
-      --   'RainbowRed',
-      --   'RainbowYellow',
-      --   'RainbowBlue',
-      --   'RainbowOrange',
-      --   'RainbowGreen',
-      --   'RainbowViolet',
-      --   'RainbowCyan',
-      -- }
-      --
-      -- local hooks = require 'ibl.hooks'
-      -- create the highlight groups in the highlight setup hook, so they are reset
-      -- every time the colorscheme changes
-      -- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-      --   vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
-      --   vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
-      --   vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
-      --   vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
-      --   vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
-      --   vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
-      --   vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
-      -- end)
-      -- vim.g.rainbow_delimiters = { highlight = highlight }
+      local hooks = require 'ibl.hooks'
+
+      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+        local normal = vim.api.nvim_get_hl(0, { name = 'Normal', link = false })
+        local hidden = normal.bg or 0x2D353B
+
+        vim.api.nvim_set_hl(0, 'IblIndent', { fg = hidden, nocombine = true })
+        vim.api.nvim_set_hl(0, 'IblWhitespace', { fg = hidden, nocombine = true })
+        vim.api.nvim_set_hl(0, 'IblScope', { fg = '#7A8478', nocombine = true })
+      end)
+
       require('ibl').setup {
-        scope = { enabled = true },
+        indent = {
+          highlight = 'IblIndent',
+          char = '▏',
+        },
+        whitespace = {
+          highlight = 'IblWhitespace',
+          remove_blankline_trail = false,
+        },
+        scope = {
+          enabled = true,
+          highlight = 'IblScope',
+          char = '▏',
+        },
       }
     end,
   },

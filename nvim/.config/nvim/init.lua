@@ -1091,6 +1091,7 @@ require('lazy').setup({
   require 'custom.plugins.wildfire',
   require 'custom.plugins.vimtex',
   require 'custom.plugins.tabline',
+  require 'custom.plugins.guess-indent',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
