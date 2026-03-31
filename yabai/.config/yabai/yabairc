@@ -63,8 +63,13 @@ yabai -m signal --add event=window_destroyed action="\
   fi"
 
 
-noManageApps='^(微信|信息|预览|系统设置|访达|音乐|网易云音乐|Spotify|Infuse|IINA|QQ|Raycast|Surge Dashboard|Surge|Dash|Telegram|WinBox)$'
+noManageApps='^(微信|信息|预览|系统设置|访达|音乐|网易云音乐|Spotify|Infuse|IINA|QQ|Raycast|Surge Dashboard|Surge|Dash|Telegram|WinBox|Microsoft Outlook|VidHub)$'
+noManageAppsTitle='^(Zotero 设置)$'
+
+
 yabai -m rule --add app="${noManageApps}" manage=off
+yabai -m rule --add title="${noManageAppsTitle}" manage=off
+
 # yabai -m rule --add app="^kitty$" focus=on
 # yabai -m rule --add app="Finder" manage=off
 # yabai -m rule --add app="Google Chrome" grid=1:2:0:0:1:1
