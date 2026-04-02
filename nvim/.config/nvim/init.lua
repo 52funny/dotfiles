@@ -475,12 +475,30 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      local function safe_git_picker(picker, opts)
+        local dir = vim.fn.expand '%:p:h'
+        if dir == '' then
+          dir = vim.loop.cwd()
+        end
+
+        local result = vim.system({ 'git', '-C', dir, 'rev-parse', '--is-inside-work-tree' }, { text = true }):wait()
+        if result.code == 0 and vim.trim(result.stdout or '') == 'true' then
+          picker(opts)
+          return
+        end
+
+        vim.notify('Current buffer is not in a Git repository', vim.log.levels.INFO)
+      end
+
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>st', function()
+        safe_git_picker(builtin.git_status)
+      end, { desc = '[S]earch Gi[T] Status' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
@@ -1041,7 +1059,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     branch = 'main',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
@@ -1078,7 +1096,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
