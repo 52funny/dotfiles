@@ -19,7 +19,7 @@ return {
     -- Disable syntax highlighting (we use Treesitter)
     vim.g.vimtex_syntax_enabled = 0
 
-    vim.g.vimtex_format_enabled = 1
+    vim.g.vimtex_format_enabled = 0
 
     -- 编译成功时不在底部显示编译成功的消息
     vim.g.vimtex_compiler_silent = 1
