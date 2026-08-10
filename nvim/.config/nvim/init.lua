@@ -1111,6 +1111,8 @@ require('lazy').setup({
   require 'custom.plugins.vimtex',
   require 'custom.plugins.tabline',
   require 'custom.plugins.guess-indent',
+  require 'custom.plugins.yazi',
+  require 'custom.plugins.cphelper',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
