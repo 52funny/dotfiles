@@ -1113,6 +1113,7 @@ require('lazy').setup({
   require 'custom.plugins.guess-indent',
   require 'custom.plugins.yazi',
   require 'custom.plugins.cphelper',
+  require 'custom.plugins.leetcode',
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
